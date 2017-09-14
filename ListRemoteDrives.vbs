@@ -34,8 +34,8 @@ strMsgBoxTitle = "Drives"
 strDrive = "C"
 strFolder = "temp\scripts"
 strDirectory = strDrive & ":\" & strFolder
-strUser = "d0c0rudakove"
-strPassword = "10namtab@"
+strUser = "udakov"
+strPassword = "tab@"
 
 ' ********** Blank the report message
 strMsg = ""
