@@ -10,7 +10,7 @@ objConnection.Open "Active Directory Provider"
 
 Set objCOmmand.ActiveConnection = objConnection
 objCommand.CommandText = _
-    "Select Name, Location from 'LDAP://DC=chi,DC=warranty,DC=local' " _
+            "Select Name, Location from 'LDAP://DC=chi,DC=vere,DC=local' " _
         & "Where objectClass='person'"  
 objCommand.Properties("Page Size") = 1000
 objCommand.Properties("Searchscope") = ADS_SCOPE_SUBTREE 
