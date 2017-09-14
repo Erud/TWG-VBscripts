@@ -11,9 +11,9 @@ objConnection.Open "Active Directory Provider"
 
 Set objCOmmand.ActiveConnection = objConnection
 'objCommand.CommandText = _
-'    "Select Name, Location from 'LDAP://DC=chi,DC=warranty,DC=local' " _
+			'    "Select Name, Location from 'LDAP://DC=chi,DC=vere,DC=local' " _
 '        & "Where objectClass='person'"  
-strBase = "<LDAP://DC=chi,DC=warranty,DC=local>"
+			strBase = "<LDAP://DC=chi,DC=vere,DC=local>"
 
  ' Filter on user objects.
  strFilter = "(&(objectCategory=person)(objectClass=user))"
