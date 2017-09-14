@@ -1,7 +1,7 @@
 ' Delete a Folder
 
 
-strComputer = "uschi2k8admon"
+strComputer = "."
 
 Set objSWbemLocator = CreateObject("WbemScripting.SWbemLocator")
 Set objWMIService = objSWbemLocator.ConnectServer _
