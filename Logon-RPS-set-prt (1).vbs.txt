@@ -1,0 +1,37 @@
+Option Explicit
+Dim objADSystemInfo, objUser, objMemberOf, objGroup, objNetwork, objPrinter 
+dim arGroup, strUser, aCN, aParam, aPrinter, strPrinter
+
+'on error resume next 
+ 
+Set objNetwork = CreateObject("Wscript.Network") 
+ 
+'Get current user info from active directory 
+Set objADSystemInfo = CreateObject("ADSystemInfo")
+'bind to current user in active directory
+strUser =  objADSystemInfo.UserName
+set objUser = GetObject("LDAP://" & objADSystemInfo.UserName) 
+
+'Get an array of group names that the user is a member of 
+objMemberOf = objUser.MemberOf 
+for Each objGroup in objMemberOf  
+	arGroup = Split(objGroup,",OU=")
+    'Test to see if it is a printer group. all printer groups should be in the same OU 
+    If (UBound(arGroup) > 0) Then 
+    	If (arGroup(1) = "Printer Groups") Then
+    		aCN = Split(arGroup(0), "=")
+    		aParam = Split(aCN(1), "\;")
+    		aPrinter = Split(aParam(0),"\\")
+    		strPrinter = "\\" & aPrinter(2) & "\" & aPrinter(3)
+    		ReDim Preserve aParam(3)
+'    		WScript.Echo strPrinter & " 1 " & aParam(1) & " 2 " & aParam(2)
+   	  	    objNetwork.AddWindowsPrinterConnection strPrinter 
+' 	        objNetwork.SetDefaultPrinter strPrinter  'set default printer
+    	End If
+    End If 
+next 
+
+
+' CN=\\\\rpsushc1ps02vp\\RPSFLTP2C4000\;\;C,OU=Printer Groups,OU=RPS Groups,OU=RPS,DC=amerdev,DC=ajgcodev,DC=int
+' \\amer.ajgco.com\sysvol\amer.ajgco.com\Policies\{6E8F5C97-6A4B-495A-AE9B-9F7A12A622FF}\User\Scripts\Logon
+
